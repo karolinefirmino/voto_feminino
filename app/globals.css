@@ -1,0 +1,49 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: white; /* Set a default background color */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+  font-family: Arial, sans-serif; /* Set a default font */
+}
+
+/* Ensure all elements use border-box sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+/* Main Container */
+.container {
+  max-width: 1200px; /* Set a maximum width for the container */
+  margin: 0 auto; /* Center the container */
+  padding: 20px; /* Add padding inside the container */
+  background-color: white; /* Set background color for the container */
+  border-radius: 8px; /* Optional: Add rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow */
+}
+
+/* Additional Styles */
+.header, .footer {
+  background-color: #1e2b6b; /* Match the color scheme */
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+}
+
+/* Example Button Styles */
+button {
+
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #9c114e;
+}
