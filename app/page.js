@@ -1,5 +1,4 @@
-"use client";
-import DocumentCatalog from '@/components/DocumentCatalog';
+import DocumentCatalog from 'src/components/DocumentCatalog';
 
 export default function Home() {
   return <DocumentCatalog />;
