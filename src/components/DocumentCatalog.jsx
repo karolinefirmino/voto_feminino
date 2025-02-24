@@ -93,7 +93,7 @@ const celebratoryFacts = [
   },
   {
     title: "Maria Thereza de Barros Camargo",
-    description: "primeira prefeita mulher do estado (1932) e uma das primeiras mulheres a ser nomeada deputada estadual (1935)",
+    description: "Primeira prefeita mulher do estado (1932) e uma das primeiras mulheres a ser nomeada deputada estadual (1935)",
     icon: "✊",
   },
   {
@@ -221,7 +221,7 @@ const DocumentCatalog = () => {
             <div className="text-center mb-4 sm:mb-8">
               <div className="inline-block bg-white/10 backdrop-blur-sm px-4 sm:px-6 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
                 <p className="text-sm sm:text-base text-white font-medium tracking-wide flex items-center">
-                  <Star className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-[#d4165c]" />
+              
                   24 de Fevereiro de 1932
                 </p>
               </div>
@@ -241,7 +241,7 @@ const DocumentCatalog = () => {
         {/* Timeline Section with Improved Mobile Design */}
         <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-6 sm:p-8 mb-8 border border-gray-100">
           <h3 className={`text-xl sm:text-2xl font-bold mb-6 sm:mb-10 flex items-center text-[#1e2b6b] ${arsenal.className}`}>
-            <Calendar className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3 text-[#d4165c]" />
+            
             Linha do Tempo: Conquista do Voto Feminino no Mundo
           </h3>
 
