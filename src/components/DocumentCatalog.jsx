@@ -76,20 +76,21 @@ const timelineData = [
 ];
 
 const celebratoryFacts = [
+
   {
-    title: "Bertha Lutz",
-    description: "Líder do movimento sufragista brasileiro e bióloga pioneira.",
-    icon: "👩‍🔬",
+    title: "Maria Thereza de Barros Camargo",
+    description: "primeira prefeita mulher do estado (1932) e uma das primeiras mulheres a ser nomeada deputada estadual (1935)",
+    icon: "✊",
   },
   {
-    title: "Celina Guimarães",
-    description: "Primeira eleitora do Brasil (RN, 1927).",
+    title: "Yolanda Stocco",
+    description: "Primeira mulher a ser eleita vereadora em Limeira (1964).",
+    icon: "⚖️",
+  },
+  {
+    title: "Elza Tank",
+    description: "Primeira mulher a ocupar a presidência do Legislativo limeirense (1983), recordista de mandatos na história da Câmara.",
     icon: "✨",
-  },
-  {
-    title: "Alzira Soriano",
-    description: "Primeira prefeita da América do Sul (1928).",
-    icon: "👩‍💼",
   },
 ];
 
@@ -153,48 +154,72 @@ const DocumentCatalog = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <div className="relative bg-[#1e2b6b] overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-[#1e2b6b] to-[#d4165c]">
-          <div className="absolute inset-0 opacity-20">
-            <div 
-              className="w-full h-full"
-              style={{
-                backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-                backgroundRepeat: 'repeat',
-                
-              }}
-            />
-          </div>
+      {/* Celebratory Header */}
+      <div className="relative overflow-hidden">
+        {/* Main gradient background with adjusted colors */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1e2b6b] to-[#d4165c] opacity-100">
+          {/* Pattern overlay with improved opacity */}
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+              backgroundSize: "60px 60px",
+              backgroundRepeat: "repeat",
+            }}
+          />
         </div>
+        <div className="relative z-10">
+          <div className="max-w-7xl mx-auto px-6 pt-12 pb-16 relative z-10">
+            {/* Info Icon */}
+            <div
+              className="absolute top-4 right-4 cursor-pointer"
+              onClick={() => setShowFacts(!showFacts)}
+            >
+              <Info className="h-6 w-6 text-white/80 hover:text-white transition-colors" />
+            </div>
 
-        <div className="max-w-7xl mx-auto px-6 pt-12 pb-16 relative">
-          <button
-            type="button"
-            className="absolute top-4 right-4 cursor-pointer"
-            onClick={() => setShowFacts(!showFacts)}
-          >
-            <Info className="h-6 w-6 text-white opacity-80 hover:opacity-100 transition-colors" />
-          </button>
+            {/* Historical Tooltip - improved positioning with reduced gap */}
+            {showFacts && (
+              <div className="fixed top-14 right-4 w-80 bg-white/95 backdrop-blur-sm rounded-lg shadow-xl p-5 border border-white/20 transform transition-all duration-300 z-[100]">
+                <h3 className="font-semibold text-[#1e2b6b] mb-3">Marcos Históricos</h3>
+                {celebratoryFacts.map((fact, index) => (
+                  <div key={index} className="mb-4 last:mb-0 flex items-start">
+                    <span className="text-2xl mr-3">{fact.icon}</span>
+                    <div>
+                      <h4 className="font-medium text-[#832161]">{fact.title}</h4>
+                      <p className="text-sm text-gray-600">{fact.description}</p>
+                    </div>
+                  </div>
+                ))}
+                <button 
+                  onClick={() => setShowFacts(false)}
+                  className="absolute top-3 right-3 text-gray-400 hover:text-[#d4165c] transition-colors"
+                >
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                  </svg>
+                </button>
+              </div>
+            )}
 
-          <div className="text-center">
-            <div className="inline-block bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
-              <p className="text-white font-medium tracking-wide flex items-center">
-                
-                24 de Fevereiro de 1932
+            {/* Main Header Content - keeping your existing code with adjusted text shadow */}
+            <div className="text-center mb-8">
+              <div className="inline-block bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
+                <p className="text-white font-medium tracking-wide flex items-center">
+                  24 de Fevereiro de 1932
+                </p>
+              </div>
+              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight drop-shadow-md">
+                Mulheres e Democracia
+              </h1>
+              <p className="text-2xl text-white/90 mb-8 max-w-3xl mx-auto font-light">
+                Celebrando 90+ Anos do Voto Feminino no Brasil
               </p>
             </div>
-            
-            <h1 className="text-5xl font-bold text-white mb-6">
-              Mulheres e Democracia
-            </h1>
-            
-            <p className="text-2xl text-white opacity-90 mb-8 max-w-3xl mx-auto font-light">
-              Celebrando 90+ Anos do Voto Feminino no Brasil
-            </p>
           </div>
         </div>
       </div>
-
       <div className="max-w-7xl mx-auto px-6 py-8">
       <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-8 border border-gray-100">
         <h3 className={`text-2xl font-bold mb-10 flex items-center text-[#1e2b6b] font-arial`}>
