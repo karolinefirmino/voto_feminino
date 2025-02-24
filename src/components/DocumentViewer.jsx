@@ -50,18 +50,18 @@ const DocumentViewer = ({ document }) => {
             </div>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
-  {/* Image Section - Updated to remove extra space */}
-  <div className="relative bg-gray-100 rounded-lg overflow-hidden flex items-center justify-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-6">
+  {/* Image Section - Updated for top alignment with horizontal center */}
+  <div className="relative bg-gray-100 rounded-lg overflow-hidden flex flex-col">
     {document.imageUrl ? (
-      <div className="w-full flex justify-center items-center p-4">
+      <div className="w-full flex justify-center items-center "> {/* Changed items-center to items-start and added padding top */}
         <img
           src={document.imageUrl}
           alt={document.title}
-          className="w-auto max-w-full h-auto rounded" // Adjusted classes
+          className="w-auto max-w-full h-auto rounded"
           style={{
-            maxHeight: 'calc(100vh - 300px)', // Dynamic max height
-            objectFit: 'contain',
+           
+            objectFit: 'cover',
           }}
         />
       </div>

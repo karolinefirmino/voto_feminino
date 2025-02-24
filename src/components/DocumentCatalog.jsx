@@ -1,3 +1,5 @@
+"use client";
+import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 import { Card } from './ui/card';
 import { Input } from './ui/input';
@@ -15,6 +17,7 @@ import {
   Star,
 } from 'lucide-react';
 import { Playfair_Display, Changa, Arsenal, Karma } from 'next/font/google';
+
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
@@ -243,10 +246,7 @@ const DocumentCatalog = () => {
                   className="w-full appearance-none bg-white border border-gray-200 rounded-md px-4 py-2 pr-8"
                 >
                   <option value="All">Todos</option>
-                  <option value="Legislation">Legislação</option>
-                  <option value="Manifesto">Manifesto</option>
-                  <option value="Historical">Documentação Histórica</option>
-                  <option value="Photographs">Fotografias</option>
+                  
                   <option value="Newspapers">Jornais da Época</option>
                 </select>
                 <ChevronDown className="h-4 w-4 absolute right-2 top-3 text-gray-400 pointer-events-none" />

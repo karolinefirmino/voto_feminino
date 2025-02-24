@@ -10,24 +10,22 @@ const readFile = promisify(fs.readFile);
 
 export async function GET() {
   try {
+    console.log('Connecting to database...');
     await dbConnect();
-    console.log('Database connected - Fetching documents');
-
-    const documents = await Document.find({})
-      .sort({ createdAt: -1 })
-      .lean();
-
+    console.log('Database connected');
+    
+    const documents = await Document.find({}).lean();
     console.log('Documents found:', documents.length);
+    
     return NextResponse.json(documents);
   } catch (error) {
-    console.error('Error fetching documents:', error);
+    console.error('Error in GET /api/documents:', error);
     return NextResponse.json(
-      { error: 'Error fetching documents' },
+      { error: error.message },
       { status: 500 }
     );
   }
 }
-
 export async function POST(request) {
   try {
     await dbConnect();
