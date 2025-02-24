@@ -37,8 +37,8 @@ export const metadata = {
   title: 'Acervo Digital - Voto Feminino',
   description: 'Celebrando 90+ Anos do Voto Feminino no Brasil',
   icons: {
-    icon: '/memorial_legislativo.png',
-    apple: '/memorial_legislativo.png',
+    icon: 'img/memorial_legislativo.png',
+    apple: 'img/memorial_legislativo.png',
   },
 }
 
