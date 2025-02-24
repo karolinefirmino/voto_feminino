@@ -221,90 +221,148 @@ const DocumentCatalog = () => {
         </div>
       </div>
       <div className="max-w-7xl mx-auto px-6 py-8">
-      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-8 border border-gray-100">
-        <h3 className={`text-2xl font-bold mb-10 flex items-center text-[#1e2b6b] font-arial`}>
-          <Calendar className="h-6 w-6 mr-3 text-[#d4165c]" />
-          Linha do Tempo: Conquista do Voto Feminino no Mundo
-        </h3>
+{/* Timeline Section with Original Desktop & New Mobile Layout */}
+<div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-6 sm:p-8 mb-8 border border-gray-100">
+  <h3 className={`text-xl sm:text-2xl font-bold mb-6 sm:mb-10 flex items-center text-[#1e2b6b] font-arial`}>
+    <Calendar className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3 text-[#d4165c]" />
+    Linha do Tempo: Conquista do Voto Feminino no Mundo
+  </h3>
 
-        <div className="relative">
-          <div className="relative grid grid-cols-1 md:grid-cols-4 gap-8">
-            {timelineData.map((event, index) => (
-              <div
-                key={index}
-                className="relative group"
-                onMouseEnter={() => setHoveredTimelineEvent(index)}
-                onMouseLeave={() => setHoveredTimelineEvent(null)}
-              >
-                <div className="flex flex-col items-center">
-                  {/* Hover Description */}
-                  <div className={`absolute bottom-full mb-4 w-72 transform -translate-x-1/2 left-1/2 
-                    transition-all duration-300 ${hoveredTimelineEvent === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
-                    <div className="bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-xl border border-gray-100">
-                      <p className={`text-sm text-gray-600 leading-relaxed ${karma.className}`}>
-                        {event.description}
-                      </p>
-                      {event.highlight && (
-                        <p className={`text-sm text-[#d4165c] font-medium mt-3 ${changa.className}`}>
-                          {event.impactText}
-                        </p>
-                      )}
-                    </div>
-                    <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 
-                      border-8 border-transparent border-t-white/95"></div>
-                  </div>
-
-                  
-                  {/* Timeline Point - Updated Design */}
-                  <div className={`
-                    w-3 h-3 rounded-full mb-4 
-                    transition-all duration-500 relative
-                    ${event.highlight
-                      ? 'bg-[#d4165c]'
-                      : 'bg-[#1e2b6b] group-hover:bg-[#832161]'}
-                    before:absolute before:content-[""] 
-                    before:w-7 before:h-7 before:rounded-full 
-                    before:border
-                    before:-left-2 before:-top-2
-                    ${event.highlight
-                      ? 'before:border-[#d4165c] before:opacity-40 before:animate-pulse'
-                      : 'before:border-[#1e2b6b] group-hover:before:border-[#832161] before:opacity-20 group-hover:before:opacity-40'}
-                    before:transition-all before:duration-500
-                    after:absolute after:content-[""]
-                    after:w-5 after:h-5 after:rounded-full
-                    after:border
-                    after:-left-1 after:-top-1
-                    ${event.highlight
-                      ? 'after:border-[#d4165c] after:opacity-60'
-                      : 'after:border-[#1e2b6b] group-hover:after:border-[#832161] after:opacity-40 group-hover:after:opacity-60'}
-                    after:transition-all after:duration-500
-                    group-hover:scale-110 group-hover:transform
-                  `}>
-                    {/* Inner dot */}
-                    <div className={`
-                      absolute inset-0 m-auto 
-                      w-1.5 h-1.5 
-                      bg-white rounded-full
-                      group-hover:scale-110 
-                      transition-transform duration-500
-                    `} />
-                  </div>
-                  {/* Date Info */}
-                  <div className="text-center">
-                    <div className={`text-base font-semibold text-[#1e2b6b] group-hover:text-[#832161] 
-                      transition-colors duration-300 ${arsenal.className}`}>
-                      {event.country}
-                    </div>
-                    <div className={`text-sm text-gray-500 mt-1 font-medium ${changa.className}`}>
-                      {event.year}
-                    </div>
-                  </div>
-                </div>
+  {/* Timeline for Desktop - Your original implementation (visible on larger screens) */}
+  <div className="hidden sm:block relative">
+    <div className="relative grid grid-cols-1 md:grid-cols-4 gap-8">
+      {timelineData.map((event, index) => (
+        <div
+          key={index}
+          className="relative group"
+          onMouseEnter={() => setHoveredTimelineEvent(index)}
+          onMouseLeave={() => setHoveredTimelineEvent(null)}
+        >
+          <div className="flex flex-col items-center">
+            {/* Hover Description */}
+            <div className={`absolute bottom-full mb-4 w-72 transform -translate-x-1/2 left-1/2 
+              transition-all duration-300 ${hoveredTimelineEvent === index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}>
+              <div className="bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-xl border border-gray-100">
+                <p className={`text-sm text-gray-600 leading-relaxed ${karma.className}`}>
+                  {event.description}
+                </p>
+                {event.highlight && (
+                  <p className={`text-sm text-[#d4165c] font-medium mt-3 ${changa.className}`}>
+                    {event.impactText}
+                  </p>
+                )}
               </div>
-            ))}
+              <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 
+                border-8 border-transparent border-t-white/95"></div>
+            </div>
+
+            {/* Timeline Point - Original Design */}
+            <div className={`
+              w-3 h-3 rounded-full mb-4 
+              transition-all duration-500 relative
+              ${event.highlight
+                ? 'bg-[#d4165c]'
+                : 'bg-[#1e2b6b] group-hover:bg-[#832161]'}
+              before:absolute before:content-[""] 
+              before:w-7 before:h-7 before:rounded-full 
+              before:border
+              before:-left-2 before:-top-2
+              ${event.highlight
+                ? 'before:border-[#d4165c] before:opacity-40 before:animate-pulse'
+                : 'before:border-[#1e2b6b] group-hover:before:border-[#832161] before:opacity-20 group-hover:before:opacity-40'}
+              before:transition-all before:duration-500
+              after:absolute after:content-[""]
+              after:w-5 after:h-5 after:rounded-full
+              after:border
+              after:-left-1 after:-top-1
+              ${event.highlight
+                ? 'after:border-[#d4165c] after:opacity-60'
+                : 'after:border-[#1e2b6b] group-hover:after:border-[#832161] after:opacity-40 group-hover:after:opacity-60'}
+              after:transition-all after:duration-500
+              group-hover:scale-110 group-hover:transform
+            `}>
+              {/* Inner dot */}
+              <div className={`
+                absolute inset-0 m-auto 
+                w-1.5 h-1.5 
+                bg-white rounded-full
+                group-hover:scale-110 
+                transition-transform duration-500
+              `} />
+            </div>
+            {/* Date Info */}
+            <div className="text-center">
+              <div className={`text-base font-semibold text-[#1e2b6b] group-hover:text-[#832161] 
+                transition-colors duration-300 ${arsenal.className}`}>
+                {event.country}
+              </div>
+              <div className={`text-sm text-gray-500 mt-1 font-medium ${changa.className}`}>
+                {event.year}
+              </div>
+            </div>
           </div>
         </div>
+      ))}
+    </div>
+  </div>
+
+  {/* New Timeline for Mobile - Only visible on small screens */}
+  <div className="sm:hidden">
+    <div className="relative">
+      {/* Vertical Timeline Line */}
+      <div className="absolute left-4 top-1 bottom-0 w-0.5 bg-gradient-to-b from-[#1e2b6b]/40 to-[#d4165c]/40"></div>
+      
+      {/* Timeline Items */}
+      <div className="space-y-8">
+        {timelineData.map((event, index) => (
+          <div key={index} className="relative pl-12 group">
+            {/* Timeline Dot */}
+            <div className={`
+              absolute left-2.5 top-1 transform -translate-x-1/2
+              w-3 h-3 rounded-full 
+              transition-all duration-300
+              ${event.highlight
+                ? 'bg-[#d4165c]'
+                : 'bg-[#1e2b6b]'}
+              z-10
+              before:absolute before:content-[""] 
+              before:w-6 before:h-6 before:rounded-full 
+              before:border
+              before:-left-1.5 before:-top-1.5
+              ${event.highlight
+                ? 'before:border-[#d4165c] before:opacity-40 before:animate-pulse'
+                : 'before:border-[#1e2b6b] before:opacity-20'}
+              before:transition-all before:duration-500
+            `}>
+              {/* Inner dot */}
+              <div className="absolute inset-0 m-auto w-1.5 h-1.5 bg-white rounded-full" />
+            </div>
+            
+            {/* Content */}
+            <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg border border-gray-100 shadow-sm">
+              <div className="flex items-baseline justify-between mb-2">
+                <div className={`text-base font-semibold text-[#1e2b6b] ${arsenal.className}`}>
+                  {event.country}
+                </div>
+                <div className={`text-sm text-gray-500 font-medium ${changa.className}`}>
+                  {event.year}
+                </div>
+              </div>
+              <p className={`text-sm text-gray-600 leading-relaxed ${karma.className}`}>
+                {event.description}
+              </p>
+              {event.highlight && (
+                <p className={`text-sm text-[#d4165c] font-medium mt-3 ${changa.className}`}>
+                  {event.impactText}
+                </p>
+              )}
+            </div>
+          </div>
+        ))}
       </div>
+    </div>
+  </div>
+</div>
 
 
 
