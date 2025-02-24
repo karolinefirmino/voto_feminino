@@ -76,7 +76,21 @@ const timelineData = [
 ];
 
 const celebratoryFacts = [
-
+  {
+    title: "Bertha Lutz",
+    description: "Líder do movimento sufragista brasileiro e bióloga pioneira.",
+    icon: "👩‍🔬",
+  },
+  {
+    title: "Carlota Pereira de Queirós",
+    description: "Primeira mulher eleita deputada federal no Brasil (1934).",
+    icon: "🏆",
+  },
+  {
+    title: "Alzira Soriano",
+    description: "Primeira prefeita da América do Sul (1928).",
+    icon: "👩‍💼",
+  },
   {
     title: "Maria Thereza de Barros Camargo",
     description: "primeira prefeita mulher do estado (1932) e uma das primeiras mulheres a ser nomeada deputada estadual (1935)",
@@ -380,117 +394,117 @@ const DocumentCatalog = () => {
 
 
         <div className="bg-white rounded-xl shadow-sm p-4 mb-8">
-{/* Cards Container with Responsive Grid */}
-<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
-  {loading ? (
-    <div className="text-center text-gray-500 py-8 col-span-full">
-      Carregando documentos...
-    </div>
-  ) : sortedDocuments.length === 0 ? (
-    <div className="text-center text-gray-500 py-8 col-span-full">
-      Nenhum documento encontrado. Tente ajustar sua pesquisa ou filtros.
-    </div>
-  ) : (
-    sortedDocuments.map((doc) => (
-      <div key={doc._id} className="relative group">
-        <div 
-          className="w-full cursor-pointer overflow-hidden bg-white rounded-lg border border-gray-200
-          transform transition-all duration-300 
-          hover:scale-105 hover:shadow-xl 
-          hover:border-[#1e2b6b]/20 
-          relative"
-          onClick={() => handleDocumentClick(doc._id)}
-        >
-          {/* Mobile-optimized layout */}
-          <div className="flex sm:block">
-            {/* Image Container - smaller width on mobile */}
-            <div className="relative w-1/3 sm:w-full h-32 sm:h-48 bg-gray-100 overflow-hidden">
-              {doc.imageUrl ? (
-                <img
-                  src={doc.imageUrl}
-                  alt={doc.title}
-                  className="w-full h-full object-cover transform transition-transform duration-500 
-                    group-hover:scale-110 filter group-hover:brightness-105"
-                />
-              ) : (
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400
-                  transition-colors duration-300 group-hover:text-[#1e2b6b]">
-                  <FileImage className="h-8 w-8 sm:h-12 sm:w-12 mb-1 sm:mb-2 transition-transform duration-300 
-                    group-hover:scale-110 group-hover:animate-pulse" />
-                  <span className="text-xs sm:text-sm">Documento</span>
-                </div>
-              )}
-              
-              {/* Category Badge */}
-              <div className="absolute top-2 left-2 z-10">
-                <span className="text-xs py-1 px-2 bg-[#1e2b6b]/80 text-white rounded-full
-                  backdrop-blur-sm transition-all duration-300 opacity-90 sm:opacity-0 sm:group-hover:opacity-100
-                  transform sm:-translate-y-2 sm:group-hover:translate-y-0">
-                  {doc.category}
-                </span>
-              </div>
-              
-              {/* Overlay with Information - Visible on hover for desktop, always visible (partially) on mobile */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent 
-                sm:opacity-0 opacity-100 sm:group-hover:opacity-100 transition-all duration-300
-                flex flex-col justify-end p-2 sm:p-3">
-                <div className="transform sm:translate-y-4 sm:group-hover:translate-y-0 transition-transform duration-300">
-                  <div className="text-xs font-medium text-white mb-1 flex items-center">
-                    <Calendar className="h-3 w-3 mr-1" />
-                    {new Date(doc.date).toLocaleDateString('pt-BR')}
+        {/* Cards Container with Responsive Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
+          {loading ? (
+            <div className="text-center text-gray-500 py-8 col-span-full">
+              Carregando documentos...
+            </div>
+          ) : sortedDocuments.length === 0 ? (
+            <div className="text-center text-gray-500 py-8 col-span-full">
+              Nenhum documento encontrado. Tente ajustar sua pesquisa ou filtros.
+            </div>
+          ) : (
+            sortedDocuments.map((doc) => (
+              <div key={doc._id} className="relative group">
+                <div 
+                  className="w-full cursor-pointer overflow-hidden bg-white rounded-lg border border-gray-200
+                  transform transition-all duration-300 
+                  hover:scale-105 hover:shadow-xl 
+                  hover:border-[#1e2b6b]/20 
+                  relative"
+                  onClick={() => handleDocumentClick(doc._id)}
+                >
+                  {/* Mobile-optimized layout */}
+                  <div className="flex sm:block">
+                    {/* Image Container - smaller width on mobile */}
+                    <div className="relative w-1/3 sm:w-full h-32 sm:h-48 bg-gray-100 overflow-hidden">
+                      {doc.imageUrl ? (
+                        <img
+                          src={doc.imageUrl}
+                          alt={doc.title}
+                          className="w-full h-full object-cover transform transition-transform duration-500 
+                            group-hover:scale-110 filter group-hover:brightness-105"
+                        />
+                      ) : (
+                        <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400
+                          transition-colors duration-300 group-hover:text-[#1e2b6b]">
+                          <FileImage className="h-8 w-8 sm:h-12 sm:w-12 mb-1 sm:mb-2 transition-transform duration-300 
+                            group-hover:scale-110 group-hover:animate-pulse" />
+                          <span className="text-xs sm:text-sm">Documento</span>
+                        </div>
+                      )}
+                      
+                      {/* Category Badge */}
+                      <div className="absolute top-2 left-2 z-10">
+                        <span className="text-xs py-1 px-2 bg-[#1e2b6b]/80 text-white rounded-full
+                          backdrop-blur-sm transition-all duration-300 opacity-90 sm:opacity-0 sm:group-hover:opacity-100
+                          transform sm:-translate-y-2 sm:group-hover:translate-y-0">
+                          {doc.category}
+                        </span>
+                      </div>
+                      
+                      {/* Overlay with Information - Visible on hover for desktop, always visible (partially) on mobile */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent 
+                        sm:opacity-0 opacity-100 sm:group-hover:opacity-100 transition-all duration-300
+                        flex flex-col justify-end p-2 sm:p-3">
+                        <div className="transform sm:translate-y-4 sm:group-hover:translate-y-0 transition-transform duration-300">
+                          <div className="text-xs font-medium text-white mb-1 flex items-center">
+                            <Calendar className="h-3 w-3 mr-1" />
+                            {new Date(doc.date).toLocaleDateString('pt-BR')}
+                          </div>
+                          <div className="text-xs text-white/80 hidden sm:block">{doc.source}</div>
+                        </div>
+                      </div>
+                      
+                      {/* Progress Indicator */}
+                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200 hidden sm:block">
+                        <div className="h-full bg-[#d4165c] w-0 group-hover:w-full transition-all duration-1000"></div>
+                      </div>
+                    </div>
+
+                    {/* Content Section - take remaining width on mobile */}
+                    <div className="flex-1 p-3 sm:p-4 bg-white transition-colors duration-300 group-hover:bg-gray-50">
+                      <h3 className="font-medium text-[#1e2b6b] text-sm truncate mb-2 
+                        group-hover:text-[#d4165c] transition-colors duration-300">
+                        {doc.title}
+                      </h3>
+                      
+                      <div className="sm:flex items-center justify-between">
+                        <div className="flex items-center text-xs text-gray-500 mb-2 sm:mb-0">
+                          <Clock className="h-3 w-3 mr-1" />
+                          {new Date(doc.createdAt).toLocaleDateString('pt-BR')}
+                        </div>
+                        
+                        {/* Source on mobile only */}
+                        <div className="text-xs text-gray-500 mb-2 sm:hidden truncate">
+                          {doc.source}
+                        </div>
+                        
+                        {/* View Button - Always visible on mobile */}
+                        <button className="sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300
+                          text-xs bg-[#1e2b6b] text-white rounded-full py-1 px-2
+                          transform scale-90 sm:group-hover:scale-100 flex items-center
+                          hover:bg-[#d4165c]">
+                          <span className="mr-1">Ver</span>
+                          <ChevronDown className="h-3 w-3 transform -rotate-90" />
+                        </button>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-xs text-white/80 hidden sm:block">{doc.source}</div>
-                </div>
-              </div>
-              
-              {/* Progress Indicator */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200 hidden sm:block">
-                <div className="h-full bg-[#d4165c] w-0 group-hover:w-full transition-all duration-1000"></div>
-              </div>
-            </div>
 
-            {/* Content Section - take remaining width on mobile */}
-            <div className="flex-1 p-3 sm:p-4 bg-white transition-colors duration-300 group-hover:bg-gray-50">
-              <h3 className="font-medium text-[#1e2b6b] text-sm truncate mb-2 
-                group-hover:text-[#d4165c] transition-colors duration-300">
-                {doc.title}
-              </h3>
-              
-              <div className="sm:flex items-center justify-between">
-                <div className="flex items-center text-xs text-gray-500 mb-2 sm:mb-0">
-                  <Clock className="h-3 w-3 mr-1" />
-                  {new Date(doc.createdAt).toLocaleDateString('pt-BR')}
+                  {/* Highlight Border Effect */}
+                  <div className="absolute inset-0 border-2 border-[#1e2b6b] rounded-lg opacity-0 
+                    group-hover:opacity-20 transition-opacity duration-300" />
                 </div>
-                
-                {/* Source on mobile only */}
-                <div className="text-xs text-gray-500 mb-2 sm:hidden truncate">
-                  {doc.source}
-                </div>
-                
-                {/* View Button - Always visible on mobile */}
-                <button className="sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300
-                  text-xs bg-[#1e2b6b] text-white rounded-full py-1 px-2
-                  transform scale-90 sm:group-hover:scale-100 flex items-center
-                  hover:bg-[#d4165c]">
-                  <span className="mr-1">Ver</span>
-                  <ChevronDown className="h-3 w-3 transform -rotate-90" />
-                </button>
               </div>
-            </div>
-          </div>
-
-          {/* Highlight Border Effect */}
-          <div className="absolute inset-0 border-2 border-[#1e2b6b] rounded-lg opacity-0 
-            group-hover:opacity-20 transition-opacity duration-300" />
+            ))
+          )}
         </div>
-      </div>
-    ))
-  )}
-</div>
-</div>
-</div> 
-    </div>
-  );
-};
+        </div>
+        </div> 
+            </div>
+          );
+        };
 
 export default DocumentCatalog;
