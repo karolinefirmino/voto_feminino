@@ -154,13 +154,13 @@ const DocumentCatalog = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Celebratory Header */}
+      {/* Responsive Celebratory Header */}
       <div className="relative overflow-hidden">
         {/* Main gradient background with adjusted colors */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1e2b6b] to-[#d4165c] opacity-100">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1e2b6b] to-[#d4165c] opacity-90">
           {/* Pattern overlay with improved opacity */}
           <div
-            className="absolute inset-0 opacity-20"
+            className="absolute inset-0 opacity-30"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
               backgroundSize: "60px 60px",
@@ -169,25 +169,25 @@ const DocumentCatalog = () => {
           />
         </div>
         <div className="relative z-10">
-          <div className="max-w-7xl mx-auto px-6 pt-12 pb-16 relative z-10">
-            {/* Info Icon */}
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-8 sm:pt-12 pb-10 sm:pb-16 relative z-10">
+            {/* Info Icon - Positioned better for mobile */}
             <div
-              className="absolute top-4 right-4 cursor-pointer"
+              className="absolute top-4 right-4 cursor-pointer z-20"
               onClick={() => setShowFacts(!showFacts)}
             >
-              <Info className="h-6 w-6 text-white/80 hover:text-white transition-colors" />
+              <Info className="h-5 w-5 sm:h-6 sm:w-6 text-white/80 hover:text-white transition-colors" />
             </div>
 
-            {/* Historical Tooltip - improved positioning with reduced gap */}
+            {/* Historical Tooltip - improved positioning for mobile */}
             {showFacts && (
-              <div className="fixed top-14 right-4 w-80 bg-white/95 backdrop-blur-sm rounded-lg shadow-xl p-5 border border-white/20 transform transition-all duration-300 z-[100]">
+              <div className="fixed top-14 right-4 w-[calc(100%-2rem)] sm:w-80 max-w-sm bg-white/95 backdrop-blur-sm rounded-lg shadow-xl p-4 sm:p-5 border border-white/20 transform transition-all duration-300 z-[100]">
                 <h3 className="font-semibold text-[#1e2b6b] mb-3">Marcos Históricos</h3>
                 {celebratoryFacts.map((fact, index) => (
-                  <div key={index} className="mb-4 last:mb-0 flex items-start">
-                    <span className="text-2xl mr-3">{fact.icon}</span>
+                  <div key={index} className="mb-3 sm:mb-4 last:mb-0 flex items-start">
+                    <span className="text-xl sm:text-2xl mr-2 sm:mr-3">{fact.icon}</span>
                     <div>
                       <h4 className="font-medium text-[#832161]">{fact.title}</h4>
-                      <p className="text-sm text-gray-600">{fact.description}</p>
+                      <p className="text-xs sm:text-sm text-gray-600">{fact.description}</p>
                     </div>
                   </div>
                 ))}
@@ -203,17 +203,18 @@ const DocumentCatalog = () => {
               </div>
             )}
 
-            {/* Main Header Content - keeping your existing code with adjusted text shadow */}
-            <div className="text-center mb-8">
-              <div className="inline-block bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
-                <p className="text-white font-medium tracking-wide flex items-center">
+            {/* Main Header Content with responsive adjustments */}
+            <div className="text-center mb-4 sm:mb-8">
+              <div className="inline-block bg-white/10 backdrop-blur-sm px-4 sm:px-6 py-1.5 sm:py-2 rounded-full mb-4 sm:mb-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
+                <p className="text-sm sm:text-base text-white font-medium tracking-wide flex items-center">
+                  <Star className="h-3 w-3 sm:h-4 sm:w-4 mr-1.5 sm:mr-2 text-[#d4165c]" />
                   24 de Fevereiro de 1932
                 </p>
               </div>
-              <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 tracking-tight drop-shadow-md">
+              <h1 className={`text-3xl sm:text-5xl md:text-6xl font-bold text-white mb-3 sm:mb-6 tracking-tight drop-shadow-md ${playfair.className} px-2`}>
                 Mulheres e Democracia
               </h1>
-              <p className="text-2xl text-white/90 mb-8 max-w-3xl mx-auto font-light">
+              <p className={`text-lg sm:text-2xl text-white/90 mb-4 sm:mb-8 max-w-3xl mx-auto font-light px-4 ${changa.className}`}>
                 Celebrando 90+ Anos do Voto Feminino no Brasil
               </p>
             </div>
