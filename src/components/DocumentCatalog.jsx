@@ -157,10 +157,10 @@ const DocumentCatalog = () => {
       {/* Responsive Celebratory Header */}
       <div className="relative overflow-hidden">
         {/* Main gradient background with adjusted colors */}
-        <div className="absolute inset-0 bg-gradient-to-r from-[#1e2b6b] to-[#d4165c] opacity-90">
+        <div className="absolute inset-0 bg-gradient-to-r from-[#1e2b6b] to-[#d4165c] opacity-100">
           {/* Pattern overlay with improved opacity */}
           <div
-            className="absolute inset-0 opacity-30"
+            className="absolute inset-0 opacity-20"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
               backgroundSize: "60px 60px",
@@ -221,10 +221,12 @@ const DocumentCatalog = () => {
           </div>
         </div>
       </div>
+
+
       <div className="max-w-7xl mx-auto px-6 py-8">
-        {/* Timeline Section with Original Desktop & New Mobile Layout */}
+        {/* Timeline Section with Improved Mobile Design */}
         <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-lg p-6 sm:p-8 mb-8 border border-gray-100">
-          <h3 className={`text-xl sm:text-2xl font-bold mb-6 sm:mb-10 flex items-center text-[#1e2b6b] font-arial`}>
+          <h3 className={`text-xl sm:text-2xl font-bold mb-6 sm:mb-10 flex items-center text-[#1e2b6b] ${arsenal.className}`}>
             <Calendar className="h-5 w-5 sm:h-6 sm:w-6 mr-2 sm:mr-3 text-[#d4165c]" />
             Linha do Tempo: Conquista do Voto Feminino no Mundo
           </h3>
@@ -307,64 +309,74 @@ const DocumentCatalog = () => {
             </div>
           </div>
 
-          {/* New Timeline for Mobile - Only visible on small screens */}
+          {/* New Timeline for Mobile - Only visible on small screens, dot-centric design */}
           <div className="sm:hidden">
-            <div className="relative">
-              {/* Vertical Timeline Line */}
-              <div className="absolute left-4 top-1 bottom-0 w-0.5 bg-gradient-to-b from-[#1e2b6b]/40 to-[#d4165c]/40"></div>
-              
-              {/* Timeline Items */}
-              <div className="space-y-8">
-                {timelineData.map((event, index) => (
-                  <div key={index} className="relative pl-12 group">
-                    {/* Timeline Dot */}
-                    <div className={`
-                      absolute left-2.5 top-1 transform -translate-x-1/2
-                      w-3 h-3 rounded-full 
-                      transition-all duration-300
-                      ${event.highlight
-                        ? 'bg-[#d4165c]'
-                        : 'bg-[#1e2b6b]'}
-                      z-10
-                      before:absolute before:content-[""] 
-                      before:w-6 before:h-6 before:rounded-full 
-                      before:border
-                      before:-left-1.5 before:-top-1.5
-                      ${event.highlight
-                        ? 'before:border-[#d4165c] before:opacity-40 before:animate-pulse'
-                        : 'before:border-[#1e2b6b] before:opacity-20'}
-                      before:transition-all before:duration-500
-                    `}>
-                      {/* Inner dot */}
-                      <div className="absolute inset-0 m-auto w-1.5 h-1.5 bg-white rounded-full" />
+            <div className="space-y-6">
+              {timelineData.map((event, index) => (
+                <div key={index} className="flex flex-col items-center">
+                  {/* Timeline Point - Matching desktop dot styling */}
+                  <div className={`
+                    w-4 h-4 rounded-full mb-3
+                    transition-all duration-300 relative
+                    ${event.highlight ? 'bg-[#d4165c]' : 'bg-[#1e2b6b]'}
+                    before:absolute before:content-[""] 
+                    before:w-8 before:h-8 before:rounded-full 
+                    before:border
+                    before:-left-2 before:-top-2
+                    ${event.highlight
+                      ? 'before:border-[#d4165c] before:opacity-40 before:animate-pulse'
+                      : 'before:border-[#1e2b6b] before:opacity-20'}
+                    before:transition-all before:duration-300
+                    after:absolute after:content-[""]
+                    after:w-6 after:h-6 after:rounded-full
+                    after:border
+                    after:-left-1 after:-top-1
+                    ${event.highlight
+                      ? 'after:border-[#d4165c] after:opacity-60'
+                      : 'after:border-[#1e2b6b] after:opacity-40'}
+                    after:transition-all after:duration-300
+                  `}>
+                    {/* Inner dot */}
+                    <div className="absolute inset-0 m-auto w-2 h-2 bg-white rounded-full" />
+                  </div>
+                  
+                  {/* Country and Year - Centered like desktop */}
+                  <div className="text-center mb-2">
+                    <div className={`text-base font-semibold text-[#1e2b6b] ${arsenal.className}`}>
+                      {event.country}
                     </div>
-                    
-                    {/* Content */}
-                    <div className="bg-white/80 backdrop-blur-sm p-4 rounded-lg border border-gray-100 shadow-sm">
-                      <div className="flex items-baseline justify-between mb-2">
-                        <div className={`text-base font-semibold text-[#1e2b6b] ${arsenal.className}`}>
-                          {event.country}
-                        </div>
-                        <div className={`text-sm text-gray-500 font-medium ${changa.className}`}>
-                          {event.year}
-                        </div>
-                      </div>
-                      <p className={`text-sm text-gray-600 leading-relaxed ${karma.className}`}>
-                        {event.description}
-                      </p>
-                      {event.highlight && (
-                        <p className={`text-sm text-[#d4165c] font-medium mt-3 ${changa.className}`}>
-                          {event.impactText}
-                        </p>
-                      )}
+                    <div className={`text-sm text-gray-500 mt-0.5 font-medium ${changa.className}`}>
+                      {event.year}
                     </div>
                   </div>
-                ))}
-              </div>
+                  
+                  {/* Event Content - Styled card */}
+                  <div className="w-full bg-white/90 backdrop-blur-sm p-4 rounded-lg border border-gray-100 shadow-sm">
+                    <p className={`text-sm text-gray-600 leading-relaxed ${karma.className}`}>
+                      {event.description}
+                    </p>
+                    {event.highlight && (
+                      <p className={`text-sm text-[#d4165c] font-medium mt-3 ${changa.className}`}>
+                        {event.impactText}
+                      </p>
+                    )}
+                  </div>
+                  
+                  {/* Visual dots connector (only between items, not for the last one) */}
+                  {index < timelineData.length - 1 && (
+                    <div className="h-6 flex justify-center items-center mt-1">
+                      <div className="flex flex-col items-center">
+                        <div className="w-1 h-1 rounded-full bg-gray-300 mb-1.5"></div>
+                        <div className="w-1 h-1 rounded-full bg-gray-300 mb-1.5"></div>
+                        <div className="w-1 h-1 rounded-full bg-gray-300"></div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         </div>
-
 
 
         <div className="bg-white rounded-xl shadow-sm p-4 mb-8">
