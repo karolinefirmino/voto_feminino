@@ -179,12 +179,12 @@ const DocumentCatalog = () => {
           <div className="text-center">
             <div className="inline-block bg-white/10 backdrop-blur-sm px-6 py-2 rounded-full mb-6 border border-white/20 transform hover:scale-105 transition-transform duration-300">
               <p className="text-white font-medium tracking-wide flex items-center">
-                <Star className="h-4 w-4 mr-2 text-[#d4165c]" />
+                
                 24 de Fevereiro de 1932
               </p>
             </div>
             
-            <h1 className="text-5xl font-bold text-white mb-6 font-playfair">
+            <h1 className="text-5xl font-bold text-white mb-6">
               Mulheres e Democracia
             </h1>
             
@@ -322,7 +322,8 @@ const DocumentCatalog = () => {
 
         <h2 className="text-2xl font-bold text-blue-900 mb-6">Acervo Histórico</h2>
         
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-4">
+        {/* Cards Container with Increased Spacing */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8">
           {loading ? (
             <div className="text-center text-gray-500 py-8 col-span-full">
               Carregando documentos...
@@ -335,46 +336,98 @@ const DocumentCatalog = () => {
             sortedDocuments.map((doc) => (
               <div key={doc._id} className="relative group">
                 <div 
-                  className="w-[160px] cursor-pointer transform transition-all duration-300 hover:scale-105 hover:shadow-xl overflow-hidden bg-white rounded-lg border border-gray-200"
-                  onClick={() => handleDocumentClick(doc._id)} // Make sure doc._id exists
+                  className="w-full cursor-pointer overflow-hidden bg-white rounded-lg border border-gray-200
+                  transform transition-all duration-300 
+                  hover:scale-105 hover:shadow-2xl 
+                  hover:border-[#1e2b6b]/20 
+                  relative"
+                  onClick={() => handleDocumentClick(doc._id)}
                 >
-                  <div className="relative h-[200px] bg-gray-100">
-                    {doc.imageUrl ? (
-                      <img
-                        src={doc.imageUrl}
-                        alt={doc.title}
-                        className="w-full h-full object-cover"
-                      />
-                    ) : (
-                      <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400">
-                        <FileText className="h-8 w-8 mb-2" />
-                        <span className="text-sm">Documento</span>
-                      </div>
-                    )}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                      <div className="absolute bottom-0 left-0 right-0 p-3 text-white">
-                        <div className="text-xs font-medium">
-                          {new Date(doc.date).toLocaleDateString('pt-BR')}
-                        </div>
-                        <div className="text-xs opacity-75">{doc.source}</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="p-3">
-                    <h3 className="font-medium text-[#1e2b6b] text-sm truncate mb-1">
-                      {doc.title}
-                    </h3>
-                    <div className="flex items-center text-xs text-gray-500">
-                      <Clock className="h-3 w-3 mr-1" />
-                      {new Date(doc.createdAt).toLocaleDateString('pt-BR')}
-                    </div>
-                  </div>
-                </div>
+          {/* Category Badge */}
+          <div className="absolute top-2 left-2 z-10">
+            <span className="text-xs py-1 px-2 bg-[#1e2b6b]/80 text-white rounded-full
+              backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300
+              transform -translate-y-2 group-hover:translate-y-0">
+              {doc.category}
+            </span>
+          </div>
+
+          {/* Bookmark Corner */}
+          <div className="absolute top-0 right-0 w-10 h-10 bg-gradient-to-bl from-[#d4165c] to-transparent
+            opacity-0 group-hover:opacity-100 transition-opacity duration-300
+            transform origin-top-right scale-0 group-hover:scale-100">
+          </div>
+
+          {/* Image Container */}
+          <div className="relative h-[200px] bg-gray-100 overflow-hidden">
+            {doc.imageUrl ? (
+              <img
+                src={doc.imageUrl}
+                alt={doc.title}
+                className="w-full h-full object-cover transform transition-transform duration-500 
+                  group-hover:scale-110 filter group-hover:brightness-105"
+              />
+            ) : (
+              <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400
+                transition-colors duration-300 group-hover:text-[#1e2b6b]">
+                <FileText className="h-12 w-12 mb-2 transition-transform duration-300 
+                  group-hover:scale-110 group-hover:animate-pulse" />
+                <span className="text-sm">Documento</span>
               </div>
-            ))
-          )}
+            )}
+            
+            {/* Overlay with Information */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent 
+              opacity-0 group-hover:opacity-100 transition-all duration-300
+              flex flex-col justify-end p-3">
+              <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+                <div className="text-xs font-medium text-white mb-1 flex items-center">
+                  <Calendar className="h-3 w-3 mr-1" />
+                  {new Date(doc.date).toLocaleDateString('pt-BR')}
+                </div>
+                <div className="text-xs text-white/80">{doc.source}</div>
+              </div>
+            </div>
+
+            {/* Progress Indicator */}
+            <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200">
+              <div className="h-full bg-[#d4165c] w-0 group-hover:w-full transition-all duration-1000"></div>
+            </div>
+          </div>
+
+          {/* Content Section */}
+          <div className="p-4 bg-white transition-colors duration-300 group-hover:bg-gray-50">
+            <h3 className="font-medium text-[#1e2b6b] text-sm truncate mb-2 
+              group-hover:text-[#d4165c] transition-colors duration-300">
+              {doc.title}
+            </h3>
+            
+            <div className="flex items-center justify-between">
+              <div className="flex items-center text-xs text-gray-500">
+                <Clock className="h-3 w-3 mr-1" />
+                {new Date(doc.createdAt).toLocaleDateString('pt-BR')}
+              </div>
+              
+              {/* View Button */}
+              <button className="opacity-0 group-hover:opacity-100 transition-all duration-300
+                text-xs bg-[#1e2b6b] text-white rounded-full py-1 px-2
+                transform scale-90 group-hover:scale-100
+                hover:bg-[#d4165c] flex items-center">
+                <span className="mr-1">Ver</span>
+                <ChevronDown className="h-3 w-3 transform -rotate-90" />
+              </button>
+            </div>
+          </div>
+
+          {/* Highlight Border Effect */}
+          <div className="absolute inset-0 border-2 border-[#1e2b6b] rounded-lg opacity-0 
+            group-hover:opacity-20 transition-opacity duration-300" />
         </div>
       </div>
+    ))
+  )}
+</div>
+</div> 
     </div>
   );
 };
