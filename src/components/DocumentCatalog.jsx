@@ -1,5 +1,3 @@
-"use client";
-import { useRouter } from 'next/navigation';
 import React, { useState, useEffect } from 'react';
 import { Card } from './ui/card';
 import { Input } from './ui/input';
@@ -17,7 +15,6 @@ import {
   Star,
 } from 'lucide-react';
 import { Playfair_Display, Changa, Arsenal, Karma } from 'next/font/google';
-
 
 const playfair = Playfair_Display({
   subsets: ['latin'],
