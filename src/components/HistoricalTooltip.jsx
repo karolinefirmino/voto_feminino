@@ -1,3 +1,7 @@
+'use client';
+
+import React from 'react';
+
 const HistoricalTooltip = ({ event, isVisible }) => {
     return (
       <div 
