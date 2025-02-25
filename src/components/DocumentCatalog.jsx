@@ -419,124 +419,124 @@ const DocumentCatalog = () => {
 
 
         <div className="bg-white rounded-xl shadow-sm p-4 mb-8">
-            {/* Enhanced Document Cards Container with Improved Mobile Experience */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
-              {loading ? (
-                <div className="text-center text-gray-500 py-8 col-span-full">
-                  <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#d4165c]"></div>
-                  <p className="mt-2">Carregando documentos...</p>
-                </div>
-              ) : sortedDocuments.length === 0 ? (
-                <div className="text-center text-gray-500 py-8 col-span-full">
-                  <div className="p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-sm border border-gray-200">
-                    <FileImage className="h-12 w-12 mx-auto text-gray-400 mb-2" />
-                    <p>Nenhum documento encontrado. Tente ajustar sua pesquisa ou filtros.</p>
-                  </div>
-                </div>
+{/* Document Cards Container */}
+<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
+  {loading ? (
+    <div className="text-center text-gray-500 py-8 col-span-full">
+      <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#d4165c]"></div>
+      <p className="mt-2">Carregando documentos...</p>
+    </div>
+  ) : sortedDocuments.length === 0 ? (
+    <div className="text-center text-gray-500 py-8 col-span-full">
+      <div className="p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-sm border border-gray-200">
+        <FileImage className="h-12 w-12 mx-auto text-gray-400 mb-2" />
+        <p>Nenhum documento encontrado. Tente ajustar sua pesquisa ou filtros.</p>
+      </div>
+    </div>
+  ) : (
+    sortedDocuments.map((doc) => (
+      <div key={doc._id} className="relative group animate-fadeIn">
+        <div
+          onClick={() => handleDocumentClick(doc._id)}
+          className="w-full cursor-pointer bg-white rounded-lg border border-gray-200
+          hover:border-[#1e2b6b]/20 relative overflow-hidden
+          transition-all duration-300 ease-in-out
+          hover:shadow-lg sm:hover:shadow-xl sm:hover:scale-103"
+        >
+          {/* Mobile Layout Structure */}
+          <div className="flex sm:flex-col">
+            {/* Image Container - optimized for mobile */}
+            <div className="relative w-1/3 sm:w-full h-32 sm:h-48 flex-shrink-0 overflow-hidden">
+              {doc.imageUrl ? (
+                <img
+                  src={doc.imageUrl}
+                  alt={doc.title}
+                  className="w-full h-full object-cover transition-transform duration-500 
+                    ease-out group-hover:scale-105 group-hover:brightness-105"
+                  loading="lazy"
+                />
               ) : (
-                sortedDocuments.map((doc) => (
-                  <div key={doc._id} className="relative group animate-fadeIn">
-                    <div
-                      onClick={() => handleDocumentClick(doc._id)}
-                      className="w-full cursor-pointer bg-white rounded-lg border border-gray-200
-                      hover:border-[#1e2b6b]/20 relative overflow-hidden
-                      transition-all duration-300 ease-in-out
-                      hover:shadow-lg sm:hover:shadow-xl sm:hover:scale-103"
-                    >
-                      {/* Mobile Layout Structure */}
-                      <div className="flex sm:flex-col">
-                        {/* Image Container - optimized for mobile */}
-                        <div className="relative w-1/3 sm:w-full h-32 sm:h-48 flex-shrink-0 overflow-hidden">
-                          {doc.imageUrl ? (
-                            <img
-                              src={doc.imageUrl}
-                              alt={doc.title}
-                              className="w-full h-full object-cover transition-transform duration-500 
-                                ease-out group-hover:scale-105 group-hover:brightness-105"
-                              loading="lazy"
-                            />
-                          ) : (
-                            <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400
-                              transition-colors duration-300 bg-gray-50 group-hover:bg-gray-100">
-                              <FileImage className="h-8 w-8 sm:h-12 sm:w-12 mb-1 sm:mb-2 transition-transform duration-300 
-                                group-hover:text-[#1e2b6b] group-hover:scale-110" />
-                              <span className="text-xs sm:text-sm">Documento</span>
-                            </div>
-                          )}
-                          
-                          {/* Category Badge - Hover visibility on both mobile and desktop */}
-                            <div className="absolute top-2 left-2 z-10">
-                              <span className="text-xs py-1 px-2 bg-[#1e2b6b]/90 text-white rounded-full
-                                backdrop-blur-sm shadow-sm opacity-0 group-hover:opacity-100
-                                transition-all duration-300 ease-in-out
-                                transform -translate-y-1 group-hover:translate-y-0">
-                                {doc.category}
-                              </span>
-                            </div>
-                          
-                          {/* Image Overlay Gradient - Subtle on mobile */}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent 
-                            opacity-40 sm:opacity-0 sm:group-hover:opacity-70 transition-opacity duration-300"></div>
-                          
-                          {/* Date Ribbon - Mobile Only */}
-                          <div className="absolute top-2 right-2 sm:hidden">
-                            <div className="bg-white/90 backdrop-blur-sm text-xs py-0.5 px-1.5 rounded-sm shadow-sm 
-                              text-[#1e2b6b] font-medium">
-                              {new Date(doc.date).toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit'})}
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Content Section - Optimized for readability on mobile */}
-                        <div className="flex-1 p-3 sm:p-4 flex flex-col justify-between overflow-hidden">
-                          {/* Top Document Info */}
-                          <div>
-                            <h3 className={`font-medium text-[#1e2b6b] text-sm leading-tight mb-1.5 line-clamp-2
-                              group-hover:text-[#d4165c] transition-colors duration-300 ${arsenal.className}`}>
-                              {doc.title}
-                            </h3>
-                            
-                            {/* Source with icon - visible on mobile */}
-                            <div className="flex items-center text-xs text-gray-500 mb-2">
-                              <BookOpen className="h-3 w-3 mr-1 flex-shrink-0" />
-                              <span className="truncate">{doc.source}</span>
-                            </div>
-                          </div>
-                          
-                          {/* Bottom Action Area */}
-                          <div className="flex items-center justify-between mt-auto pt-1 sm:pt-2">
-                            {/* Date on desktop, hidden on mobile */}
-                            <div className="hidden sm:flex items-center text-xs text-gray-500">
-                              <Calendar className="h-3 w-3 mr-1" />
-                              {new Date(doc.date).toLocaleDateString('pt-BR')}
-                            </div>
-                            
-                            {/* View Button - Always visible with subtle hover effect */}
-                            <button className="text-xs bg-[#1e2b6b]/90 hover:bg-[#d4165c] text-white rounded-full 
-                              py-1 px-2.5 ml-auto transition-all duration-300 ease-in-out
-                              flex items-center shadow-sm group-hover:shadow">
-                              <span className="mr-1">Ver</span>
-                              <ChevronDown className="h-3 w-3 transform -rotate-90 transition-transform 
-                                group-hover:translate-x-0.5" />
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                      
-                      {/* Document Progress Bar - Desktop Only */}
-                      <div className="hidden sm:block absolute bottom-0 left-0 right-0 h-0.5 bg-gray-100">
-                        <div className="h-full bg-[#d4165c] w-0 group-hover:w-full transition-all duration-1000 ease-out"></div>
-                      </div>
-                    </div>
-                    
-                    {/* Touch Ripple Effect for Mobile */}
-                    <div className="absolute inset-0 pointer-events-none sm:hidden">
-                      <div className="absolute inset-0 rounded-lg ripple-effect"></div>
-                    </div>
-                  </div>
-                ))
+                <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400
+                  transition-colors duration-300 bg-gray-50 group-hover:bg-gray-100">
+                  <FileImage className="h-8 w-8 sm:h-12 sm:w-12 mb-1 sm:mb-2 transition-transform duration-300 
+                    group-hover:text-[#1e2b6b] group-hover:scale-110" />
+                  <span className="text-xs sm:text-sm">Documento</span>
+                </div>
               )}
+              
+              {/* Category Badge - Visible on hover for both mobile and desktop */}
+              <div className="absolute top-2 left-2 z-10">
+                <span className="text-xs py-1 px-2 bg-[#1e2b6b]/90 text-white rounded-full
+                  backdrop-blur-sm shadow-sm opacity-0 group-hover:opacity-100
+                  transition-all duration-300 ease-in-out
+                  transform -translate-y-1 group-hover:translate-y-0">
+                  {doc.category}
+                </span>
+              </div>
+              
+              {/* Image Overlay Gradient - Subtle on mobile */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent 
+                opacity-40 sm:opacity-0 sm:group-hover:opacity-70 transition-opacity duration-300"></div>
+              
+              {/* Date ribbon removed from here */}
             </div>
+
+            {/* Content Section - With date below title */}
+            <div className="flex-1 p-3 sm:p-4 flex flex-col justify-between overflow-hidden">
+              {/* Top Document Info */}
+              <div>
+                <h3 className={`font-medium text-[#1e2b6b] text-sm leading-tight mb-1.5 line-clamp-2
+                  group-hover:text-[#d4165c] transition-colors duration-300 ${arsenal.className}`}>
+                  {doc.title}
+                </h3>
+                
+                {/* Date display on mobile - below title */}
+                <div className="flex items-center text-xs text-gray-500 mb-1.5">
+                  <Calendar className="h-3 w-3 mr-1 flex-shrink-0" />
+                  <span>{new Date(doc.date).toLocaleDateString('pt-BR')}</span>
+                </div>
+                
+                {/* Source with icon */}
+                <div className="flex items-center text-xs text-gray-500 mb-2">
+                  <BookOpen className="h-3 w-3 mr-1 flex-shrink-0" />
+                  <span className="truncate">{doc.source}</span>
+                </div>
+              </div>
+              
+              {/* Bottom Action Area */}
+              <div className="flex items-center justify-between mt-auto pt-1 sm:pt-2">
+                {/* Date hidden on mobile, visible on desktop (optional) */}
+                <div className="hidden sm:flex items-center text-xs text-gray-500">
+                  <Calendar className="h-3 w-3 mr-1" />
+                  {new Date(doc.date).toLocaleDateString('pt-BR')}
+                </div>
+                
+                {/* View Button - Always visible with subtle hover effect */}
+                <button className="text-xs bg-[#1e2b6b]/90 hover:bg-[#d4165c] text-white rounded-full 
+                  py-1 px-2.5 ml-auto transition-all duration-300 ease-in-out
+                  flex items-center shadow-sm group-hover:shadow">
+                  <span className="mr-1">Ver</span>
+                  <ChevronDown className="h-3 w-3 transform -rotate-90 transition-transform 
+                    group-hover:translate-x-0.5" />
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          {/* Document Progress Bar - Desktop Only */}
+          <div className="hidden sm:block absolute bottom-0 left-0 right-0 h-0.5 bg-gray-100">
+            <div className="h-full bg-[#d4165c] w-0 group-hover:w-full transition-all duration-1000 ease-out"></div>
+          </div>
+        </div>
+        
+        {/* Touch Ripple Effect for Mobile */}
+        <div className="absolute inset-0 pointer-events-none sm:hidden">
+          <div className="absolute inset-0 rounded-lg ripple-effect"></div>
+        </div>
+      </div>
+    ))
+  )}
+</div>
         </div>
         </div> 
             </div>
