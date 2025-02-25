@@ -193,29 +193,54 @@ const DocumentCatalog = () => {
             </div>
 
             {/* Historical Tooltip - improved positioning for mobile */}
-            {showFacts && (
-              <div className="fixed top-14 right-4 w-[calc(100%-2rem)] sm:w-80 max-w-sm bg-white/95 backdrop-blur-sm rounded-lg shadow-xl p-4 sm:p-5 border border-white/20 transform transition-all duration-300 z-[100]">
-                <h3 className="font-semibold text-[#1e2b6b] mb-3">Marcos Históricos</h3>
-                {celebratoryFacts.map((fact, index) => (
-                  <div key={index} className="mb-3 sm:mb-4 last:mb-0 flex items-start">
-                    <span className="text-xl sm:text-2xl mr-2 sm:mr-3">{fact.icon}</span>
-                    <div>
-                      <h4 className="font-medium text-[#832161]">{fact.title}</h4>
-                      <p className="text-xs sm:text-sm text-gray-600">{fact.description}</p>
+              {/* Improved Historical Tooltip with Properly Fixed Header */}
+              {showFacts && (
+                <div className="fixed top-16 inset-x-4 sm:inset-x-auto sm:right-4 sm:top-16 sm:w-80 max-w-[calc(100%-2rem)] bg-white/95 backdrop-blur-sm rounded-xl shadow-xl border border-white/20 transform transition-all duration-300 z-[100] flex flex-col max-h-[80vh]">
+                  {/* Header with title and close button - properly fixed */}
+                  <div className="flex justify-between items-center p-4 border-b border-gray-100 sticky top-0 bg-white/95 backdrop-blur-sm z-10 rounded-t-xl">
+                    <h3 className={`font-semibold text-[#1e2b6b] ${arsenal.className}`}>Marcos Históricos</h3>
+                    <button 
+                      onClick={() => setShowFacts(false)}
+                      className="text-gray-400 hover:text-[#d4165c] transition-colors p-1 rounded-full hover:bg-gray-100/50"
+                      aria-label="Fechar"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                      </svg>
+                    </button>
+                  </div>
+                  
+                  {/* Scrollable content area */}
+                  <div className="p-4 overflow-y-auto flex-1">
+                    {/* Facts list with enhanced styling */}
+                    <div className="space-y-4">
+                      {celebratoryFacts.map((fact, index) => (
+                        <div key={index} className="flex items-start group">
+                          <div className="flex-shrink-0 w-10 h-10 flex items-center justify-center rounded-full bg-gradient-to-br from-[#1e2b6b]/10 to-[#d4165c]/10 mr-3 group-hover:from-[#1e2b6b]/20 group-hover:to-[#d4165c]/20 transition-colors">
+                            <span className="text-2xl">{fact.icon}</span>
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <h4 className={`font-medium text-[#832161] mb-1 ${playfair.className}`}>
+                              {fact.title}
+                            </h4>
+                            <p className={`text-sm text-gray-600 ${karma.className}`}>
+                              {fact.description}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
                     </div>
                   </div>
-                ))}
-                <button 
-                  onClick={() => setShowFacts(false)}
-                  className="absolute top-3 right-3 text-gray-400 hover:text-[#d4165c] transition-colors"
-                >
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                  </svg>
-                </button>
-              </div>
-            )}
+                  
+                  {/* Footer note - fixed at bottom */}
+                  <div className="p-3 border-t border-gray-100 bg-white/95 backdrop-blur-sm rounded-b-xl">
+                    <p className={`text-xs text-gray-500 italic ${changa.className}`}>
+                      Fonte: Arquivo Nacional, Arquivo CML e TSE
+                    </p>
+                  </div>
+                </div>
+              )}
 
             {/* Main Header Content with responsive adjustments */}
             <div className="text-center mb-4 sm:mb-8">
@@ -394,113 +419,124 @@ const DocumentCatalog = () => {
 
 
         <div className="bg-white rounded-xl shadow-sm p-4 mb-8">
-        {/* Cards Container with Responsive Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
-          {loading ? (
-            <div className="text-center text-gray-500 py-8 col-span-full">
-              Carregando documentos...
-            </div>
-          ) : sortedDocuments.length === 0 ? (
-            <div className="text-center text-gray-500 py-8 col-span-full">
-              Nenhum documento encontrado. Tente ajustar sua pesquisa ou filtros.
-            </div>
-          ) : (
-            sortedDocuments.map((doc) => (
-              <div key={doc._id} className="relative group">
-                <div 
-                  className="w-full cursor-pointer overflow-hidden bg-white rounded-lg border border-gray-200
-                  transform transition-all duration-300 
-                  hover:scale-105 hover:shadow-xl 
-                  hover:border-[#1e2b6b]/20 
-                  relative"
-                  onClick={() => handleDocumentClick(doc._id)}
-                >
-                  {/* Mobile-optimized layout */}
-                  <div className="flex sm:block">
-                    {/* Image Container - smaller width on mobile */}
-                    <div className="relative w-1/3 sm:w-full h-32 sm:h-48 bg-gray-100 overflow-hidden">
-                      {doc.imageUrl ? (
-                        <img
-                          src={doc.imageUrl}
-                          alt={doc.title}
-                          className="w-full h-full object-cover transform transition-transform duration-500 
-                            group-hover:scale-110 filter group-hover:brightness-105"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400
-                          transition-colors duration-300 group-hover:text-[#1e2b6b]">
-                          <FileImage className="h-8 w-8 sm:h-12 sm:w-12 mb-1 sm:mb-2 transition-transform duration-300 
-                            group-hover:scale-110 group-hover:animate-pulse" />
-                          <span className="text-xs sm:text-sm">Documento</span>
-                        </div>
-                      )}
-                      
-                      {/* Category Badge */}
-                      <div className="absolute top-2 left-2 z-10">
-                        <span className="text-xs py-1 px-2 bg-[#1e2b6b]/80 text-white rounded-full
-                          backdrop-blur-sm transition-all duration-300 opacity-90 sm:opacity-0 sm:group-hover:opacity-100
-                          transform sm:-translate-y-2 sm:group-hover:translate-y-0">
-                          {doc.category}
-                        </span>
-                      </div>
-                      
-                      {/* Overlay with Information - Visible on hover for desktop, always visible (partially) on mobile */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent 
-                        sm:opacity-0 opacity-100 sm:group-hover:opacity-100 transition-all duration-300
-                        flex flex-col justify-end p-2 sm:p-3">
-                        <div className="transform sm:translate-y-4 sm:group-hover:translate-y-0 transition-transform duration-300">
-                          <div className="text-xs font-medium text-white mb-1 flex items-center">
-                            <Calendar className="h-3 w-3 mr-1" />
-                            {new Date(doc.date).toLocaleDateString('pt-BR')}
+            {/* Enhanced Document Cards Container with Improved Mobile Experience */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6 md:gap-8">
+              {loading ? (
+                <div className="text-center text-gray-500 py-8 col-span-full">
+                  <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-[#d4165c]"></div>
+                  <p className="mt-2">Carregando documentos...</p>
+                </div>
+              ) : sortedDocuments.length === 0 ? (
+                <div className="text-center text-gray-500 py-8 col-span-full">
+                  <div className="p-4 bg-white/80 backdrop-blur-sm rounded-lg shadow-sm border border-gray-200">
+                    <FileImage className="h-12 w-12 mx-auto text-gray-400 mb-2" />
+                    <p>Nenhum documento encontrado. Tente ajustar sua pesquisa ou filtros.</p>
+                  </div>
+                </div>
+              ) : (
+                sortedDocuments.map((doc) => (
+                  <div key={doc._id} className="relative group animate-fadeIn">
+                    <div
+                      onClick={() => handleDocumentClick(doc._id)}
+                      className="w-full cursor-pointer bg-white rounded-lg border border-gray-200
+                      hover:border-[#1e2b6b]/20 relative overflow-hidden
+                      transition-all duration-300 ease-in-out
+                      hover:shadow-lg sm:hover:shadow-xl sm:hover:scale-103"
+                    >
+                      {/* Mobile Layout Structure */}
+                      <div className="flex sm:flex-col">
+                        {/* Image Container - optimized for mobile */}
+                        <div className="relative w-1/3 sm:w-full h-32 sm:h-48 flex-shrink-0 overflow-hidden">
+                          {doc.imageUrl ? (
+                            <img
+                              src={doc.imageUrl}
+                              alt={doc.title}
+                              className="w-full h-full object-cover transition-transform duration-500 
+                                ease-out group-hover:scale-105 group-hover:brightness-105"
+                              loading="lazy"
+                            />
+                          ) : (
+                            <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-400
+                              transition-colors duration-300 bg-gray-50 group-hover:bg-gray-100">
+                              <FileImage className="h-8 w-8 sm:h-12 sm:w-12 mb-1 sm:mb-2 transition-transform duration-300 
+                                group-hover:text-[#1e2b6b] group-hover:scale-110" />
+                              <span className="text-xs sm:text-sm">Documento</span>
+                            </div>
+                          )}
+                          
+                          {/* Category Badge - Always visible on mobile, appears on hover for desktop */}
+                          <div className="absolute top-2 left-2 z-10">
+                            <span className="text-xs py-1 px-2 bg-[#1e2b6b]/90 text-white rounded-full
+                              backdrop-blur-sm shadow-sm opacity-100 sm:opacity-0 sm:group-hover:opacity-100
+                              transition-all duration-300 ease-in-out
+                              transform sm:-translate-y-1 sm:group-hover:translate-y-0">
+                              {doc.category}
+                            </span>
                           </div>
-                          <div className="text-xs text-white/80 hidden sm:block">{doc.source}</div>
+                          
+                          {/* Image Overlay Gradient - Subtle on mobile */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent 
+                            opacity-40 sm:opacity-0 sm:group-hover:opacity-70 transition-opacity duration-300"></div>
+                          
+                          {/* Date Ribbon - Mobile Only */}
+                          <div className="absolute top-2 right-2 sm:hidden">
+                            <div className="bg-white/90 backdrop-blur-sm text-xs py-0.5 px-1.5 rounded-sm shadow-sm 
+                              text-[#1e2b6b] font-medium">
+                              {new Date(doc.date).toLocaleDateString('pt-BR', {day: '2-digit', month: '2-digit'})}
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Content Section - Optimized for readability on mobile */}
+                        <div className="flex-1 p-3 sm:p-4 flex flex-col justify-between overflow-hidden">
+                          {/* Top Document Info */}
+                          <div>
+                            <h3 className={`font-medium text-[#1e2b6b] text-sm leading-tight mb-1.5 line-clamp-2
+                              group-hover:text-[#d4165c] transition-colors duration-300 ${arsenal.className}`}>
+                              {doc.title}
+                            </h3>
+                            
+                            {/* Source with icon - visible on mobile */}
+                            <div className="flex items-center text-xs text-gray-500 mb-2">
+                              <BookOpen className="h-3 w-3 mr-1 flex-shrink-0" />
+                              <span className="truncate">{doc.source}</span>
+                            </div>
+                          </div>
+                          
+                          {/* Bottom Action Area */}
+                          <div className="flex items-center justify-between mt-auto pt-1 sm:pt-2">
+                            {/* Date on desktop, hidden on mobile */}
+                            <div className="hidden sm:flex items-center text-xs text-gray-500">
+                              <Calendar className="h-3 w-3 mr-1" />
+                              {new Date(doc.date).toLocaleDateString('pt-BR')}
+                            </div>
+                            
+                            {/* View Button - Always visible with subtle hover effect */}
+                            <button className="text-xs bg-[#1e2b6b]/90 hover:bg-[#d4165c] text-white rounded-full 
+                              py-1 px-2.5 ml-auto transition-all duration-300 ease-in-out
+                              flex items-center shadow-sm group-hover:shadow">
+                              <span className="mr-1">Ver</span>
+                              <ChevronDown className="h-3 w-3 transform -rotate-90 transition-transform 
+                                group-hover:translate-x-0.5" />
+                            </button>
+                          </div>
                         </div>
                       </div>
                       
-                      {/* Progress Indicator */}
-                      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gray-200 hidden sm:block">
-                        <div className="h-full bg-[#d4165c] w-0 group-hover:w-full transition-all duration-1000"></div>
+                      {/* Document Progress Bar - Desktop Only */}
+                      <div className="hidden sm:block absolute bottom-0 left-0 right-0 h-0.5 bg-gray-100">
+                        <div className="h-full bg-[#d4165c] w-0 group-hover:w-full transition-all duration-1000 ease-out"></div>
                       </div>
                     </div>
-
-                    {/* Content Section - take remaining width on mobile */}
-                    <div className="flex-1 p-3 sm:p-4 bg-white transition-colors duration-300 group-hover:bg-gray-50">
-                      <h3 className="font-medium text-[#1e2b6b] text-sm truncate mb-2 
-                        group-hover:text-[#d4165c] transition-colors duration-300">
-                        {doc.title}
-                      </h3>
-                      
-                      <div className="sm:flex items-center justify-between">
-                        <div className="flex items-center text-xs text-gray-500 mb-2 sm:mb-0">
-                          <Clock className="h-3 w-3 mr-1" />
-                          {new Date(doc.createdAt).toLocaleDateString('pt-BR')}
-                        </div>
-                        
-                        {/* Source on mobile only */}
-                        <div className="text-xs text-gray-500 mb-2 sm:hidden truncate">
-                          {doc.source}
-                        </div>
-                        
-                        {/* View Button - Always visible on mobile */}
-                        <button className="sm:opacity-0 sm:group-hover:opacity-100 transition-all duration-300
-                          text-xs bg-[#1e2b6b] text-white rounded-full py-1 px-2
-                          transform scale-90 sm:group-hover:scale-100 flex items-center
-                          hover:bg-[#d4165c]">
-                          <span className="mr-1">Ver</span>
-                          <ChevronDown className="h-3 w-3 transform -rotate-90" />
-                        </button>
-                      </div>
+                    
+                    {/* Touch Ripple Effect for Mobile */}
+                    <div className="absolute inset-0 pointer-events-none sm:hidden">
+                      <div className="absolute inset-0 rounded-lg ripple-effect"></div>
                     </div>
                   </div>
-
-                  {/* Highlight Border Effect */}
-                  <div className="absolute inset-0 border-2 border-[#1e2b6b] rounded-lg opacity-0 
-                    group-hover:opacity-20 transition-opacity duration-300" />
-                </div>
-              </div>
-            ))
-          )}
-        </div>
+                ))
+              )}
+            </div>
         </div>
         </div> 
             </div>
