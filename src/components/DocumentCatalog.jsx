@@ -464,15 +464,15 @@ const DocumentCatalog = () => {
                             </div>
                           )}
                           
-                          {/* Category Badge - Always visible on mobile, appears on hover for desktop */}
-                          <div className="absolute top-2 left-2 z-10">
-                            <span className="text-xs py-1 px-2 bg-[#1e2b6b]/90 text-white rounded-full
-                              backdrop-blur-sm shadow-sm opacity-100 sm:opacity-0 sm:group-hover:opacity-100
-                              transition-all duration-300 ease-in-out
-                              transform sm:-translate-y-1 sm:group-hover:translate-y-0">
-                              {doc.category}
-                            </span>
-                          </div>
+                          {/* Category Badge - Hover visibility on both mobile and desktop */}
+                            <div className="absolute top-2 left-2 z-10">
+                              <span className="text-xs py-1 px-2 bg-[#1e2b6b]/90 text-white rounded-full
+                                backdrop-blur-sm shadow-sm opacity-0 group-hover:opacity-100
+                                transition-all duration-300 ease-in-out
+                                transform -translate-y-1 group-hover:translate-y-0">
+                                {doc.category}
+                              </span>
+                            </div>
                           
                           {/* Image Overlay Gradient - Subtle on mobile */}
                           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent 
